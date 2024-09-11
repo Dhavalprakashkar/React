@@ -1,8 +1,30 @@
-function Home() {
-    return <div>Home</div>
+import { useContext } from "react";
+import Usecontext, { Authcon } from "./04-09-24/usecontext";
 
-      
-    
-  }
-  
-  export default Home;
+function Home(){
+    const{state,dispatch}=useContext(Authcon);
+    function increment(){
+        dispatch({type:"INCREMENT"})
+    };
+    function decrement(){
+        dispatch({type:"DECREMENT"})
+    };
+    function reset(){
+        dispatch({type:"RESET"})
+    };
+
+    return (
+        <div>
+            <h1>HOME PAGE</h1>
+            <h1>Use Context</h1>
+            <h1>Counter:{state?.counter}</h1>
+            <button onClick={increment}>+</button>
+            <button onClick={decrement}>-</button>
+            <button onClick={reset}>RESET</button>
+
+        </div>
+    )
+}
+
+
+export default Home;

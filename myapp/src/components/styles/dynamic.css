@@ -1,0 +1,13 @@
+.active{
+    background-color: blue;
+    color:black
+}
+.notactive{
+    background-color: orange;
+    color:black
+}
+
+#main{
+    width:150px;
+    height:50px
+}
