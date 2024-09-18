@@ -20,6 +20,12 @@ import  Dynamicclass from './components/29-08/dynamicclass';
 import Usereducer from './components/usereducer';
 import Usecontext from './components/04-09-24/usecontext';
 import Usememo from './components/05-09-24/usememo';
+import Memo from './components/mem';
+import Callback from './components/12-09-24/Callback';
+import Task from './components/ReactTest/Task';
+import UseRef from './components/15-09-24/UseRef';
+
+
 
 
 function App() {
@@ -61,6 +67,12 @@ function App() {
       <Route path='/userReducer' element={<Usereducer/>}/>
       <Route path='/usecontext' element={<Usecontext/>}/>
       <Route path='/usememo' element={<Usememo/>}/>
+      <Route path='/mem' element={<Memo/>}/>
+      <Route path='/callback' element={<Callback/>}/>
+      <Route path='/task' element={<Task/>}/>
+      <Route path="/useref" element={<UseRef/>} />
+
+     
 
    
 

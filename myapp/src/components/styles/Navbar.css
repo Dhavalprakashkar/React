@@ -1,6 +1,8 @@
 .div{
     display: flex;
     justify-content: space-around;
-    border: 2px solid black;
+    border: 2px solid white;
     cursor:pointer;
+    background-color: black;
+    color: white;
 }
