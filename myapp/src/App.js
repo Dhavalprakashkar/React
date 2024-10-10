@@ -24,6 +24,7 @@ import Memo from './components/mem';
 import Callback from './components/12-09-24/Callback';
 import Task from './components/ReactTest/Task';
 import UseRef from './components/15-09-24/UseRef';
+import Weather from './components/Weather';
 
 
 
@@ -71,6 +72,7 @@ function App() {
       <Route path='/callback' element={<Callback/>}/>
       <Route path='/task' element={<Task/>}/>
       <Route path="/useref" element={<UseRef/>} />
+      <Route path="/weather" element={<Weather/>}/>
 
      
 
