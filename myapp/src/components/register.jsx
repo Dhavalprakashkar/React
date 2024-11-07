@@ -1,51 +1,108 @@
-import React, { useState } from 'react'
+import { useState } from "react";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import api from "./axiosConfig";
 
+function Register() {
+  const router = useNavigate();
+  const [userData, setUserData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+  console.log(userData, "userData");
+  function handleChange(event) {
+    // console.log(event.target.value, event.target.name, "check");
+    setUserData({ ...userData, [event.target.name]: event.target.value });
+  }
 
-const Register = () => {
-  const[state,state2]=useState({
-      name:"",
-      email:"",
-      password:"",
-      confirmpass:""
+  async function handleSubmit(event) {
+    event.preventDefault();
+    if (
+      userData.name &&
+      userData.email &&
+      userData.password &&
+      userData.confirmPassword
+    ) {
+      if (userData.password !== userData.confirmPassword) {
+        return toast.error("Password and confirm password not macthed.");
+      }
+      try {
+        let response = await api.post("/auth/register", { userData });
+        // response = {
+        //   data: { success: true, message: "Register succesfulyy comp;leted." },
+        // };
+        if (response.data.success) {
+          // console.log(response);
+          // alert(response.data.message);
+          toast.success(response.data.message);
+          router("/login");
+        } else {
+          toast.error(response.data.message);
+        }
+      } catch (error) {
+        console.log(error);
+        toast.error(error);
+      }
+    } else {
+      toast.error("All fields are required.");
+    }
+  }
 
-       })
-       
-      
-       
+  // var myobject = {};
+  // myobject.hi = "hii";
+  // myobject["event.target.name"] = event.target.value
+  // {[event.target.name] : event.target.value}
 
-       function value(event){
-          state2({...state,[event.target.name]:event.target.value})
-
-          console.log(event.target.value,event.target.name)
-
-       }
-      //  console.log(state)
-       
-      
-      
-       
-return (  
-  <div style={{fontSize:"20px",marginTop:"50px",marginLeft:"300px",border:"1px solid black",width:"50%",height:"400px"}}>
-      <form autoComplete='off'>
-          <label>Name</label><br></br>
-          <input onChange={value} autoComplete="new-password" type='text'placeholder='Enter Name..' name="name"></input><br></br>
-          <label>Email</label><br></br>
-          <input onChange={value} autoComplete="new-password" type='email' placeholder='Enter Email..' name="email"></input><br></br>
-          <label>Password</label><br></br>
-          <input onChange={value} autoComplete="new-password"  type='password' placeholder='Enter Password..' name=" password"></input><br></br>
-          <label>Confirm Password</label><br></br>
-          <input onChange={value}  type='password' placeholder='Enter Confirm Pass..' name="confirmpass"></input><br></br>
-          <input type='submit'></input>
-          
-
-
-
+  return (
+    <div>
+      <h1>Register</h1>
+      <form onSubmit={handleSubmit}>
+        <label>Name</label>
+        <br />
+        <input
+          onChange={handleChange}
+          type="text"
+          placeholder="Type your name.."
+          name="name"
+          required
+        />
+        <br />
+        <label>Email</label>
+        <br />
+        <input
+          onChange={handleChange}
+          type="email"
+          placeholder="Type your email.."
+          name="email"
+          required
+        />
+        <br />
+        <label>Password </label>
+        <br />
+        <input
+          onChange={handleChange}
+          type="password"
+          placeholder="Type your password.."
+          name="password"
+          required
+        />
+        <br />
+        <label>Confirm Password </label>
+        <br />
+        <input
+          onChange={handleChange}
+          type="password"
+          placeholder="Confirm your password.."
+          name="confirmPassword"
+          required
+        />
+        <br />
+        <input type="submit" value="Register" />
       </form>
-    
-  </div>
-)
+    </div>
+  );
 }
-
 export default Register;
-
-
