@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import Usecontext, { Authcon } from "./04-09-24/usecontext";
+import Usecontext, { Authcon } from "./21-08-24/usecontext";
 
 function Home(){
     const{state,dispatch}=useContext(Authcon);
@@ -16,7 +16,7 @@ function Home(){
     return (
         <div>
             <h1>HOME PAGE</h1>
-            <h1>Use Context</h1>
+            <h1> Welcome {state?.user?.name} </h1>
             <h1>Counter:{state?.counter}</h1>
             <button onClick={increment}>+</button>
             <button onClick={decrement}>-</button>

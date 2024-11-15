@@ -18,13 +18,15 @@ import Mapping2 from './components/24-08/Mapping2';
 import  Todo  from './components/29-08/todo';
 import  Dynamicclass from './components/29-08/dynamicclass';
 import Usereducer from './components/usereducer';
-import Usecontext from './components/04-09-24/usecontext';
+import Usecontext from './components/21-08-24/usecontext';
 import Usememo from './components/05-09-24/usememo';
 import Memo from './components/mem';
 import Callback from './components/12-09-24/Callback';
 import Task from './components/ReactTest/Task';
 import UseRef from './components/15-09-24/UseRef';
 import Weather from './components/Weather';
+import ViewProducts from './components/viewproducts';
+import CreateProduct from './components/createproduct';
 
 
 
@@ -73,6 +75,10 @@ function App() {
       <Route path='/task' element={<Task/>}/>
       <Route path="/useref" element={<UseRef/>} />
       <Route path="/weather" element={<Weather/>}/>
+      <Route path="/create-product" element={<CreateProduct/>}/>
+
+      <Route path="/view-products" element={<ViewProducts/>}/>
+
 
      
 

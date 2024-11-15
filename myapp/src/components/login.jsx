@@ -1,83 +1,73 @@
-import { useState, useContext } from "react";
-import axios from "axios";
-import toast from "react-hot-toast";
+import { useContext, useState } from "react";
+import {toast} from "react-hot-toast"
 import { useNavigate } from "react-router-dom";
-import api from "./axiosConfig";
-import { AuthContext } from "./context/AuthContext";
+import api from "./axios";
+import { Authcon } from "./21-08-24/usecontext";
 
 function Login() {
-  const { dispatch } = useContext(AuthContext);
-  const router = useNavigate();
-  const [userData, setUserData] = useState({
-    email: "",
-    password: "",
-  });
-  console.log(userData, "userData");
-  function handleChange(event) {
-    // console.log(event.target.value, event.target.name, "check");
-    setUserData({ ...userData, [event.target.name]: event.target.value });
-  }
+    const{dispatch}=useContext(Authcon)
+    const path=useNavigate();
+    const [state, updatedstate] = useState({
+        email: "",
+        password: ""
+        
 
 
+    });
+    function uservalue(event) {
+        console.log(event.target.value, event.target.name);
+        updatedstate({ ...state, [event.target.name]: event.target.value })
 
-  async function handleSubmit(event) {
-    event.preventDefault();
-    if (userData.email && userData.password) {
-      try {
-        let response = await api.post("/auth/login", { userData });
-        // response = {
-        //   data: { success: true, message: "Register succesfulyy comp;leted." },
-        // };
-        if (response.data.success) {
-          // console.log(response);
-          // alert(response.data.message);
-          dispatch({type : "LOGIN" , payload : response.data.userData  });
-          toast.success(response.data.message);
-          router("/");
-        } else {
-          toast.error(response.data.message);
-        }
-      } catch (error) {
-        console.log(error);
-        toast.error(error);
-      }
-    } else {
-      toast.error("All fields are required.");
     }
-  }
+    console.log(state);
+    async function submit(event) {
+        event.preventDefault();
+        if (!state.email || !state.password ) {
+            return toast.error("Fill the fields")
+        }
+            
+            try {
+                const response=await api.post("/auth/login",{Userdata:state})
+                if(response.data.success){
+                    dispatch({type:"login",payload:response.data.Userdata})
+                    toast.success(response.data.message)
+                    path("/")
 
-  // var myobject = {};
-  // myobject.hi = "hii";
-  // myobject["event.target.name"] = event.target.value
-  // {[event.target.name] : event.target.value}
+                }
+                else{
+                    toast.error(response.data.message)
+                }
 
-  return (
-    <div>
-      <h1>Login :</h1>
-      <form onSubmit={handleSubmit}>
-        <label>Email</label>
-        <br />
-        <input
-          onChange={handleChange}
-          type="email"
-          placeholder="Type your email.."
-          name="email"
-          required
-        />
-        <br />
-        <label>Password </label>
-        <br />
-        <input
-          onChange={handleChange}
-          type="password"
-          placeholder="Type your password.."
-          name="password"
-          required
-        />
-        <br />
-        <input type="submit" value="Login " />
-      </form>
-    </div>
-  );
+
+            }
+            catch (error) {
+                toast.error(error.response.data.message)
+
+            }
+
+
+        }
+        
+    
+
+        return (
+            <div style={{ border: "1px solid black", marginTop: "50px", width: "350px", marginLeft: "500px", height: "200px" }}>
+                <h1>Login Page</h1>
+                <form onSubmit={submit} autoComplete="off">
+
+                    <label>E-mail</label><br></br>
+                    <input onChange={uservalue} autoComplete="new-email" name="email" type="email"></input><br></br>
+                    <label>Password</label><br></br>
+                    <input onChange={uservalue} type="password" name="password" autoComplete="new-password"></input><br></br>
+                   
+                    <input type="submit"></input>
+                </form>
+            </div>
+
+
+
+        )
+    
 }
-export default Login;
+
+    export default Login;
